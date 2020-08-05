@@ -1,3 +1,30 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+  color: #212529;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .App {
   text-align: center;
 }
@@ -41,4 +68,26 @@ main {
 .editingImage {
   height: 600px;
   width: 600px;
+}
+
+.navbar {
+  float: right;
+}
+
+.nav {
+  display: block;
+}
+
+.nav-button {
+  background-color: transparent;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  float: left;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  width: 3rem;
+  overflow: visible;
 }
