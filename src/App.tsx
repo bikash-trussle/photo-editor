@@ -20,6 +20,34 @@ export const App: React.FC = () => {
       }
     }
 
+    const  grayScale = (imgObj: HTMLImageElement) => {
+        const canvas = document.createElement('canvas');
+        const canvasContext = canvas.getContext('2d');
+        if (!canvasContext){
+            throw Error("Cannot create canvas")
+        }
+         
+        const imgW = imgObj.width;
+        const imgH = imgObj.height;
+        canvas.width = imgW;
+        canvas.height = imgH;
+         
+        canvasContext?.drawImage(imgObj, 0, 0);
+        const imgPixels = canvasContext.getImageData(0, 0, imgW, imgH);
+         
+        for(var y = 0; y < imgPixels.height; y++){
+            for(var x = 0; x < imgPixels.width; x++){
+                var i = (y * 4) * imgPixels.width + x * 4;
+                var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+                imgPixels.data[i] = avg; 
+                imgPixels.data[i + 1] = avg; 
+                imgPixels.data[i + 2] = avg;
+            }
+        }
+        canvasContext.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+        return canvas.toDataURL();
+    }
+
 
     useEffect(() => {
         if (file !== "") {
@@ -51,8 +79,6 @@ export const App: React.FC = () => {
                 cropper?.reset();
                 cropper?.clear();
                 cropper?.destroy();
-                console.log(file, "file")
-                console.log(originalFile, "orig")
                 setCropper(undefined);
                 setFile(originalFile);
                 break;
@@ -62,6 +88,11 @@ export const App: React.FC = () => {
                 setCropper(undefined);
                 setFile(url as any);
                 break;
+            case 'gray-scale':
+                const imageDataUrl = grayScale(document.getElementById("editingImage") as HTMLImageElement);
+                cropper?.destroy()
+                setCropper(undefined);
+                setFile(imageDataUrl as any);
             default:
                 //do nothing
         }
@@ -71,14 +102,12 @@ export const App: React.FC = () => {
       if (file) {
         return (
           <div className="imageEditorContainer">
-            
             <img alt="Upload here" className="editingImage" id="editingImage" src={file}/>
-            <div 
-                className="toolbar">
-                <button id="move" onClick={() => setMode("crop")} title="Move (M)" className="toolbar__button"><span className="fa fa-arrows"></span></button> 
-                <button id="rotate-left" onClick={() => setMode("rotate-left")} title="Rotate Left (L)" className="toolbar__button"><span className="fa fa-rotate-left"></span></button> 
-                <button id="rotate-right" onClick={() => setMode("rotate-right")} title="Rotate Right (R)" className="toolbar__button"><span className="fa fa-rotate-right"></span></button> 
-                
+                <div className="toolbar">
+                    <button id="move" onClick={() => setMode("crop")} title="Move (M)" className="toolbar__button"><span className="fa fa-arrows"></span></button>
+                    <button id="grayscale" onClick={() => setMode("gray-scale")} title="Grayscale (M)" className="toolbar__button"><span className="fa fa-camera-retro"></span></button>
+                    <button id="rotate-left" onClick={() => setMode("rotate-left")} title="Rotate Left (L)" className="toolbar__button"><span className="fa fa-rotate-left"></span></button>
+                    <button id="rotate-right" onClick={() => setMode("rotate-right")} title="Rotate Right (R)" className="toolbar__button"><span className="fa fa-rotate-right"></span></button>
                 </div>
             </div>
         )
