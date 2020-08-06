@@ -35,8 +35,8 @@ export const App: React.FC = () => {
         canvasContext?.drawImage(imgObj, 0, 0);
         const imgPixels = canvasContext.getImageData(0, 0, imgW, imgH);
          
-        for(const y = 0; y < imgPixels.height; y++){
-            for(const x = 0; x < imgPixels.width; x++){
+        for(let y = 0; y < imgPixels.height; y++){
+            for(let x = 0; x < imgPixels.width; x++){
                 const i = (y * 4) * imgPixels.width + x * 4;
                 const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
                 imgPixels.data[i] = avg; 
