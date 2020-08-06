@@ -104,10 +104,10 @@ export const App: React.FC = () => {
           <div className="imageEditorContainer">
             <img alt="Upload here" className="editingImage" id="editingImage" src={file}/>
                 <div className="toolbar">
-                    <button id="move" onClick={() => setMode("crop")} title="Move (M)" className="toolbar__button"><span className="fa fa-arrows"></span></button>
-                    <button id="grayscale" onClick={() => setMode("gray-scale")} title="Grayscale (M)" className="toolbar__button"><span className="fa fa-camera-retro"></span></button>
-                    <button id="rotate-left" onClick={() => setMode("rotate-left")} title="Rotate Left (L)" className="toolbar__button"><span className="fa fa-rotate-left"></span></button>
-                    <button id="rotate-right" onClick={() => setMode("rotate-right")} title="Rotate Right (R)" className="toolbar__button"><span className="fa fa-rotate-right"></span></button>
+                    <button id="move" onClick={() => setMode("crop")} title="Move" className="toolbar__button"><span className="fa fa-arrows"></span></button>
+                    <button id="grayscale" onClick={() => setMode("gray-scale")} title="Grayscale" className="toolbar__button"><span className="fa fa-camera-retro"></span></button>
+                    <button id="rotate-left" onClick={() => setMode("rotate-left")} title="Rotate Left" className="toolbar__button"><span className="fa fa-rotate-left"></span></button>
+                    <button id="rotate-right" onClick={() => setMode("rotate-right")} title="Rotate Right" className="toolbar__button"><span className="fa fa-rotate-right"></span></button>
                 </div>
             </div>
         )
